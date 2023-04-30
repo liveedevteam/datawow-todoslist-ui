@@ -7,15 +7,16 @@ const IndexPage = () => {
   const { todos, getTaskList } = useTodos()
 
   useEffect(() => {
+    setIsLoading(false)
+  }, [todos])
+
+  useEffect(() => {
     setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+    getTaskList()
   }, []);
 
   return (
     <div>
-      <h1>Hello Next.js</h1>
     </div>
   );
 };
