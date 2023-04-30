@@ -1,6 +1,17 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import React from 'react';
+import LoadingOverlay from '@/components/LoadingOverlay';
+import { LoadingProvider } from '@/contexts/loadingContext';
+import { AppProps } from 'next/app';
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+import '../styles/globals.css';
+
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+  return (
+    <LoadingProvider>
+      <LoadingOverlay />
+      <Component {...pageProps} />
+    </LoadingProvider>
+  );
+};
+
+export default MyApp;
