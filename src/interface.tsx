@@ -4,3 +4,9 @@ export interface ApiError extends Error {
         data: any,
     }
 }
+
+export interface TaskInterface {
+    id: string,
+    title: string,
+    completed: boolean
+}
