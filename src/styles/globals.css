@@ -373,3 +373,8 @@ input[type=text] {
 input[type=text]:focus {
     border: none;
 }
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+}

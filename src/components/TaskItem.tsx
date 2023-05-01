@@ -56,14 +56,25 @@ export default function TaskItem(props: any) {
             <div className={styles.cardItem}>
                 <div style={{ float: "left" }}>
                     {
-                        mode === "list" && <div>
+                        mode === "list" && <div className='checkbox-container'>
                             <CheckBox
                                 task={task}
                                 updateTask={updateTask}
                                 updateData={updateData}
                                 todos={todos}
                                 setTodos={setTodos}
-                            />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{task.title}
+                            />
+                            <label htmlFor="myCheckbox" style={{ marginLeft: "35px" }}>
+                                {
+                                    task.completed && <div style={{
+                                        textDecoration: "line-through",
+                                        color: "#A9A9A9"
+                                    }}>{task.title}</div>
+                                }
+                                {
+                                    !task.completed && <div>{task.title}</div>
+                                }
+                            </label>
                         </div>
                     }
                     {
