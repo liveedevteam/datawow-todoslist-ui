@@ -15,9 +15,11 @@ const useTodos = () => {
         setTodos,
         createData,
         setCreateData,
+        updateData,
+        setUpdateData,
         getTaskList: () => getTaskList({ todos, setTodos }),
         createTask: (title: string) => createTask({ todos, setTodos, title, createData, setCreateData }),
-        updateTask: () => updateTask(),
+        updateTask: (id: string, title: string) => updateTask({ todos, setTodos, id, title, updateData, setUpdateData }),
         deleteTask: () => deleteTask()
     };
 };

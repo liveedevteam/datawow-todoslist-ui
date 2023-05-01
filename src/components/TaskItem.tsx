@@ -14,12 +14,14 @@ export default function TaskItem(props: any) {
         updateTask,
         createData,
         setCreateData,
-        updateDta,
+        updateData,
         setUpdateData
     } = useTodos()
     let { setIsLoading } = useLoading()
 
     useEffect(() => {
+        console.log("Update data")
+        console.log(updateData)
         if (createData.state === "CREATE_TASK_SUCCESS") {
             // console.log(createData)
             setTodos({
@@ -33,9 +35,22 @@ export default function TaskItem(props: any) {
                 state: "STAND_BY"
             })
             setInputValue("")
+        } else if (updateData.state === "UPDATE_TASK_SUCCESS") {
+            console.log("Update data success")
+            setTodos({
+                ...todos,
+                results: updateData.results,
+                state: "STAND_BY"
+            })
+            setUpdateData({
+                ...updateData,
+                results: updateData.results,
+                state: "STAND_BY"
+            })
+            setInputValue("")
         }
         setIsLoading(false)
-    }, [createData.state, todos.state])
+    }, [updateData.state, createData.state, todos.state])
 
     return (
         <div>
