@@ -20,6 +20,9 @@ npm run dev
 ## Change API Testing
 
 1. Go to next.config.js
+```bash
+./next.config.js
+```
 2. Edit link in apiUrl
 ```bash
 const nextConfig = {
