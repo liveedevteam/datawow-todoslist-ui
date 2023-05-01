@@ -9,7 +9,10 @@ const getTaskList = async (props: any) => {
             ...todos,
             status: response.status,
             state: "GET_TASKLIST_SUCCESS",
-            results: response.data
+            results: response.data.map((e: any) => {
+                e.isEdit = false
+                return e
+            })
         })
     } catch (error) {
         console.error(error)

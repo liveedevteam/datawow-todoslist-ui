@@ -8,5 +8,11 @@ export interface ApiError extends Error {
 export interface TaskInterface {
     id: string,
     title: string,
-    completed: boolean
+    completed: boolean,
+    isEdit: boolean
+}
+
+export interface TaskFilterOption {
+    text: string,
+    value: string,
 }

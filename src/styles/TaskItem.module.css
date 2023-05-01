@@ -1,0 +1,13 @@
+.cardItem {
+    background-color: white;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-bottom: 15px;
+    border-radius: 999px;
+    margin-top: 20px;
+}
+
+input .checkbox {
+    width: 25px
+}
+
