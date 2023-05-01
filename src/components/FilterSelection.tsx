@@ -14,7 +14,7 @@ const FilterSelection = (props: any) => {
         setTodoDefault
     } = props
     let { todos, setTodos, getTaskList } = useTodos()
-    const { isLoading, setIsLoading } = useLoading()
+    const { setIsLoading } = useLoading()
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
