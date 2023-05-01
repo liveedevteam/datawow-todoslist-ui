@@ -41,11 +41,12 @@ export default function CheckBox(props: any) {
         }
         setIsLoading(false)
     }, [updateData.state])
-    
+
 
     return (
         <label className={styles.customCheckbox}>
             <input
+                id={task.id}
                 type="checkbox"
                 checked={isChecked}
                 onChange={handleCheckboxChange}
