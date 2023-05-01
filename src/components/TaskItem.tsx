@@ -2,11 +2,40 @@ import React, { useEffect, useState } from 'react'
 import CheckBox from './CheckBox'
 import styles from '../styles/TaskItem.module.css';
 import InputText from './InputText';
+import useTodos from '@/hooks/useTodos';
+import { useLoading } from '@/contexts/loadingContext';
 
 export default function TaskItem(props: any) {
     let [isDisplay, setIsDisplay] = useState(false)
     const { task, mode, todos, setTodos } = props
     let [inputValue, setInputValue] = useState(task && task.title || "")
+    let {
+        createTask,
+        updateTask,
+        createData,
+        setCreateData,
+        updateDta,
+        setUpdateData
+    } = useTodos()
+    let { setIsLoading } = useLoading()
+
+    useEffect(() => {
+        if (createData.state === "CREATE_TASK_SUCCESS") {
+            // console.log(createData)
+            setTodos({
+                ...todos,
+                results: createData.results,
+                state: "STAND_BY"
+            })
+            setCreateData({
+                ...createData,
+                results: createData.results,
+                state: "STAND_BY"
+            })
+            setInputValue("")
+        }
+        setIsLoading(false)
+    }, [createData.state, todos.state])
 
     return (
         <div>
@@ -67,7 +96,21 @@ export default function TaskItem(props: any) {
                             borderRadius: "9999px",
                             backgroundColor: "#585292",
                             color: "white"
-                        }}>
+                        }}
+                            onClick={() => {
+                                if (mode === "create") {
+                                    setIsLoading(true)
+                                    let title = inputValue
+                                    createTask(title)
+
+                                } else if (mode === "update") {
+                                    setIsLoading(true)
+                                    let title = inputValue
+                                    let id = task.id
+                                    updateTask(id, title)
+                                }
+                            }}
+                        >
                             {mode === "create" && 'Create'}
                             {mode === "update" && 'Save'}
                         </button>

@@ -12,7 +12,7 @@ export default function TaskList(props: any) {
                     {e.isEdit && <TaskItem task={e} mode="update" todos={todos} setTodos={setTodos} />}
                 </div>)
             })}
-            <TaskItem task={{}} mode="create" />
+            <TaskItem task={{}} mode="create" todos={todos} setTodos={setTodos} />
         </div>
     )
 }

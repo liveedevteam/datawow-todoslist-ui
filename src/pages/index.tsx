@@ -5,12 +5,18 @@ import useTodos from '@/hooks/useTodos';
 import React, { useEffect } from 'react';
 
 const IndexPage = () => {
-  const { isLoading, setIsLoading } = useLoading();
+  const { setIsLoading } = useLoading();
   const { todos, setTodos, getTaskList } = useTodos()
 
   useEffect(() => {
+    if (todos.state === "GET_TASKLIST_SUCCESS") {
+      setTodos({
+        ...todos,
+        state: "STAND_BY"
+      })
+    } 
     setIsLoading(false)
-  }, [todos])
+  }, [todos.state])
 
   useEffect(() => {
     setIsLoading(true)
