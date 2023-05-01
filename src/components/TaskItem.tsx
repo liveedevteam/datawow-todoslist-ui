@@ -20,8 +20,6 @@ export default function TaskItem(props: any) {
     let { setIsLoading } = useLoading()
 
     useEffect(() => {
-        console.log("Update data")
-        console.log(updateData)
         if (createData.state === "CREATE_TASK_SUCCESS") {
             // console.log(createData)
             setTodos({
@@ -48,6 +46,8 @@ export default function TaskItem(props: any) {
                 state: "STAND_BY"
             })
             setInputValue("")
+        } else if (updateData.state === "UPDATE_TASKCOMPLETE_SUCCESS") {
+            
         }
         setIsLoading(false)
     }, [updateData.state, createData.state, todos.state])

@@ -4,7 +4,7 @@ import isApiError from "@/services/isApiError"
 const createTask = async (props: any) => {
     let { todos, setTodos, title, createData, setCreateData } = props
     try {
-        let response = await apiClient.post('/todos', { title })
+        let response = await apiClient.post('/todos', { title, completed: false })
         // console.log(response)
         if (response.status === 201) {
             // console.log("Create success")
