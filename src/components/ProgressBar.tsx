@@ -5,7 +5,7 @@ import { TaskInterface } from '@/interface';
 export default function ProgressBar(props: any) {
     let [progress, setProgress] = useState(0)
     let [completeTaskCounter, setCompleteTaskCounter] = useState(0)
-    let { todos } = props
+    let { todos, setTodos } = props
 
     const progressCard: React.CSSProperties = {
         backgroundColor: '#E07C7C',
@@ -27,10 +27,17 @@ export default function ProgressBar(props: any) {
         let taskFinish = data.filter((e: TaskInterface) => e.completed).length
         setCompleteTaskCounter(taskFinish)
         setProgress((taskFinish / taskLength) * 100)
+        setTodos({
+            ...todos,
+            state: "STAND_BY"
+        })
     }
 
     useEffect(() => {
-        if (todos.state === "GET_TASKLIST_SUCCESS") calculateProgressPercent(todos.results)
+        // console.log(todos)
+        if (todos.state === "GET_TASKLIST_SUCCESS" || todos.state === "UPDATE_TASK_SUCCESS" || todos.state ===  "DELETE_TASK_SUCCESS" || todos.state === "CREATE_TASK_SUCCESS") {
+            calculateProgressPercent(todos.results)
+        }
     }, [todos.state])
 
     return (

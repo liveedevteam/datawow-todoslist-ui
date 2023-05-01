@@ -12,20 +12,22 @@ export default function TaskItem(props: any) {
     let {
         createTask,
         updateTask,
+        deleteTask,
         createData,
-        setCreateData,
         updateData,
+        setCreateData,
         setUpdateData
     } = useTodos()
     let { setIsLoading } = useLoading()
 
     useEffect(() => {
+        // console.log(todos)
         if (createData.state === "CREATE_TASK_SUCCESS") {
             // console.log(createData)
             setTodos({
                 ...todos,
                 results: createData.results,
-                state: "STAND_BY"
+                state: createData.state
             })
             setCreateData({
                 ...createData,
@@ -33,12 +35,11 @@ export default function TaskItem(props: any) {
                 state: "STAND_BY"
             })
             setInputValue("")
-        } else if (updateData.state === "UPDATE_TASK_SUCCESS") {
-            console.log("Update data success")
+        } else if (updateData.state === "UPDATE_TASK_SUCCESS" || updateData.state === "DELETE_TASK_SUCCESS") {
             setTodos({
                 ...todos,
                 results: updateData.results,
-                state: "STAND_BY"
+                state: updateData.state
             })
             setUpdateData({
                 ...updateData,
@@ -46,8 +47,6 @@ export default function TaskItem(props: any) {
                 state: "STAND_BY"
             })
             setInputValue("")
-        } else if (updateData.state === "UPDATE_TASKCOMPLETE_SUCCESS") {
-            
         }
         setIsLoading(false)
     }, [updateData.state, createData.state, todos.state])
@@ -58,7 +57,13 @@ export default function TaskItem(props: any) {
                 <div style={{ float: "left" }}>
                     {
                         mode === "list" && <div>
-                            <CheckBox task={task} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{task.title}
+                            <CheckBox
+                                task={task}
+                                updateTask={updateTask}
+                                updateData={updateData}
+                                todos={todos}
+                                setTodos={setTodos}
+                            />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{task.title}
                         </div>
                     }
                     {
@@ -86,10 +91,10 @@ export default function TaskItem(props: any) {
                                     let index = 0
                                     for (let newTodo of newTodos) {
                                         if (task.id === newTodo.id) {
-                                            console.log(task.id)
-                                            console.log(`Before Edit: ${task.isEdit}`)
+                                            // console.log(task.id)
+                                            // console.log(`Before Edit: ${task.isEdit}`)
                                             newTodos[index].isEdit = !task.isEdit
-                                            console.log(`After Edit: ${newTodos[index].isEdit}`)
+                                            // console.log(`After Edit: ${newTodos[index].isEdit}`)
                                             setTodos({
                                                 ...todos,
                                                 results: newTodos
@@ -98,7 +103,13 @@ export default function TaskItem(props: any) {
                                         index++
                                     }
                                 }}>Edit</a>
-                                <a className='dropdown-item' style={{ color: "#E07C7C" }}>Delete</a>
+                                <a className='dropdown-item' style={{ color: "#E07C7C" }}
+                                    onClick={() => {
+                                        setIsLoading(true)
+                                        let id = task.id
+                                        deleteTask(id)
+                                    }}
+                                >Delete</a>
                             </div>
                         </div>}
                     </div>}
@@ -122,7 +133,8 @@ export default function TaskItem(props: any) {
                                     setIsLoading(true)
                                     let title = inputValue
                                     let id = task.id
-                                    updateTask(id, title)
+                                    let completed = task.completed
+                                    updateTask(id, title, completed)
                                 }
                             }}
                         >

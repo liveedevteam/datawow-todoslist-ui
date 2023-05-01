@@ -2,9 +2,9 @@ import apiClient from "@/services/apiClient"
 import isApiError from "@/services/isApiError"
 
 const updateTask = async (props: any) => {
-    let { todos, setTodos, id, title, updateData, setUpdateData } = props
+    let { todos, setTodos, id, title, completed, updateData, setUpdateData } = props
     try {
-        let response = await apiClient.put('/todos/' + id, { title })
+        let response = await apiClient.put('/todos/' + id, { title, completed })
         // console.log(response)
         if (response.status === 200) {
             // console.log("Create success")

@@ -12,8 +12,8 @@ export default function TaskContainer(props: any) {
                 <div className='row'>
                     <div className='col-md-3'></div>
                     <div className='col-12 col-sm-12 col-md-6'>
-                        <TaskContainerHeader todos={todos} filter={filter} setFilter={setFilter} />
-                        <TaskList todos={todos} filter={filter} setTodos={setTodos}/>
+                        <TaskContainerHeader todos={todos} setTodos={setTodos} filter={filter} setFilter={setFilter} />
+                        <TaskList todos={todos} filter={filter} setTodos={setTodos} />
                     </div>
                 </div>
             </div>
