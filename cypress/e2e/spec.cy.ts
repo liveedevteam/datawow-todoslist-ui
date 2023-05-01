@@ -2,7 +2,7 @@ describe('Todos List Index (Filter)', () => {
 
   beforeEach(() => {
     cy.visit('http://localhost:3000')
-    cy.viewport('macbook-16');
+    cy.viewport('iphone-8');
   });
 
   it('Select Filter to Done', () => {

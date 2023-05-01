@@ -44,7 +44,7 @@ export default function ProgressBar(props: any) {
         <div className='container'>
             <div className='row'>
                 <div className='col-md-3'></div>
-                <div className='col-12 col-sm-12 col-md-6'>
+                <div className='col-sm-12 col-md-6'>
                     <div style={progressCard}>
                         <h1 style={colorHeader}>Progress</h1>
                         <div className={styles.progressBarContainer}>
